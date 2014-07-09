@@ -1,4 +1,5 @@
 require "spurious/ruby/awssdk/helper/version"
+require 'spurious/ruby/awssdk/strategy'
 require "aws-sdk"
 require "json"
 
@@ -15,6 +16,7 @@ module Spurious
         end
 
         def self.configure(strategy = nil)
+          strategy ||= Spurious::Ruby::Awssdk::Strategy.new(true)
           strategy.apply(port_config)
         end
 

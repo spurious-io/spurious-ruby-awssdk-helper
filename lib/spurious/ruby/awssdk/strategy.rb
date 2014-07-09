@@ -7,8 +7,13 @@ module Spurious
       class Strategy
         attr_accessor :mapping
 
-        def initialize
+        def initialize(set_all = false)
           @mapping = {}
+          if set_all then
+            dynamo(true, true)
+            sqs(true, true)
+            s3(true, true)
+          end
         end
 
         def dynamo(port = true, ip = false)

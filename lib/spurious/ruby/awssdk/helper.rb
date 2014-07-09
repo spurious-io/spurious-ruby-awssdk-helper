@@ -8,14 +8,14 @@ module Spurious
       module Helper
 
         def self.port_config()
-          config = `spurious ports --machine-readable`
+          config = `spurious ports --json`
           JSON.parse(config)
         rescue Exception
           raise("The spurious CLI tool didn't return the port configuration")
         end
 
         def self.configure(strategy = nil)
-
+          strategy.apply(port_config)
         end
 
       end

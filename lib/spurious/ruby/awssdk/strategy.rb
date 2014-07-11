@@ -44,7 +44,7 @@ module Spurious
           mapping.each do |type, mappings|
             ports = config[type]
             AWS.config("#{mappings['identifier']}_port".to_sym => ports.first['HostPort']) if mappings['port']
-            AWS.config("#{mappings['identifier']}_endpoint".to_sym => 'localhost') if mappings['ip']
+            AWS.config("#{mappings['identifier']}_endpoint".to_sym => ports.first['Host']) if mappings['ip']
           end
         end
 

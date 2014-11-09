@@ -2,6 +2,7 @@ require "spurious/ruby/awssdk/helper/version"
 require 'spurious/ruby/awssdk/strategy'
 require "aws-sdk"
 require "json"
+require "uri"
 
 module Spurious
   module Ruby
@@ -16,28 +17,23 @@ module Spurious
         end
 
         def self.docker_config
-          regex     = /\/(?<host>[0-9\.]+):(?<port>[0-9]+)/
-          dynamo_db = regex.match(ENV['SPURIOUS_DYNAMODB_PORT'])
-          s3        = regex.match(ENV['SPURIOUS_S3_PORT'])
-          sqs       = regex.match(ENV['SPURIOUS_SQS_PORT'])
-
           {
             "spurious-dynamo" => [
               {
-                "Host"     => dynamo_db[:host],
-                "HostPort" => dynamo_db[:port]
+                "Host"     => ENV['SPURIOUS.DYNAMODB.LOCAL_NAME'].split('/').last,
+                "HostPort" => URI(ENV['SPURIOUS.DYNAMODB.LOCAL_PORT']).port
               }
             ],
             "spurious-sqs" => [
               {
-                "Host"     => sqs[:host],
-                "HostPort" => sqs[:port]
+                "Host"     => ENV['SPURIOUS.S3.LOCAL_NAME'].split('/').last,
+                "HostPort" => URI(ENV['SPURIOUS.S3.LOCAL_PORT']).port
               }
             ],
             "spurious-s3" => [
               {
-                "Host"     => s3[:host],
-                "HostPort" => s3[:port]
+                "Host"     => ENV['SPURIOUS.S3.LOCAL_NAME'].split('/').last,
+                "HostPort" => URI(ENV['SPURIOUS.SQS.LOCAL_PORT']).port
               }
             ]
           }

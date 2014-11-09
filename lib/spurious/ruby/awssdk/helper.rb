@@ -26,14 +26,14 @@ module Spurious
             ],
             "spurious-sqs" => [
               {
-                "Host"     => ENV['SPURIOUS.S3.LOCAL_NAME'].split('/').last,
-                "HostPort" => URI(ENV['SPURIOUS.S3.LOCAL_PORT']).port
+                "Host"     => ENV['SPURIOUS.SQS.LOCAL_NAME'].split('/').last,
+                "HostPort" => URI(ENV['SPURIOUS.SQS.LOCAL_PORT']).port
               }
             ],
             "spurious-s3" => [
               {
                 "Host"     => ENV['SPURIOUS.S3.LOCAL_NAME'].split('/').last,
-                "HostPort" => URI(ENV['SPURIOUS.SQS.LOCAL_PORT']).port
+                "HostPort" => URI(ENV['SPURIOUS.S3.LOCAL_PORT']).port
               }
             ]
           }

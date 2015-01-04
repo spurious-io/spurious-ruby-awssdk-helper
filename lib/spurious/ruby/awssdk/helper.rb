@@ -20,20 +20,20 @@ module Spurious
           {
             "spurious-dynamo" => [
               {
-                "Host"     => ENV['SPURIOUS.DYNAMODB.LOCAL_NAME'].split('/').last,
-                "HostPort" => URI(ENV['SPURIOUS.DYNAMODB.LOCAL_PORT']).port
+                "Host"     => ENV['DYNAMODB.SPURIOUS.LOCALHOST_NAME'].split('/').last,
+                "HostPort" => URI(ENV['DYNAMODB.SPURIOUS.LOCALHOST_PORT']).port
               }
             ],
             "spurious-sqs" => [
               {
-                "Host"     => ENV['SPURIOUS.SQS.LOCAL_NAME'].split('/').last,
-                "HostPort" => URI(ENV['SPURIOUS.SQS.LOCAL_PORT']).port
+                "Host"     => ENV['SQS.SPURIOUS.LOCALHOST_NAME'].split('/').last,
+                "HostPort" => URI(ENV['SQS.SPURIOUS.LOCALHOST_PORT']).port
               }
             ],
             "spurious-s3" => [
               {
-                "Host"     => ENV['SPURIOUS.S3.LOCAL_NAME'].split('/').last,
-                "HostPort" => URI(ENV['SPURIOUS.S3.LOCAL_PORT']).port
+                "Host"     => ENV['S3.SPURIOUS.LOCALHOST_NAME'].split('/').last,
+                "HostPort" => URI(ENV['S3.SPURIOUS.LOCALHOST_PORT']).port
               }
             ]
           }

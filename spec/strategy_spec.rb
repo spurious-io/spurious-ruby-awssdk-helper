@@ -8,19 +8,22 @@ describe Spurious::Ruby::Awssdk::Strategy do
         'spurious-sqs' => [
           {
             'GuestPort' => 123,
-            'HostPort'  => 456
+            'HostPort'  => 456,
+            'Host'      => 'foo'
           }
         ],
         'spurious-s3' => [
           {
             'GuestPort' => 789,
-            'HostPort'  => 101
+            'HostPort'  => 101,
+            'Host'      => 'foo'
           }
         ],
         'spurious-dynamo' => [
           {
             'GuestPort' => 121,
-            'HostPort'  => 314
+            'HostPort'  => 314,
+            'Host'      => 'foo'
           }
         ]
       }
@@ -31,7 +34,7 @@ describe Spurious::Ruby::Awssdk::Strategy do
       subject.sqs
       subject.s3
 
-      expect(AWS).to receive(:config).exactly(3).times
+      expect(AWS).to receive(:config).exactly(7).times
       subject.apply(config)
 
     end
@@ -39,7 +42,7 @@ describe Spurious::Ruby::Awssdk::Strategy do
     it "only applys a subset of the options" do
       subject.dynamo(true, true)
 
-      expect(AWS).to receive(:config).exactly(2).times
+      expect(AWS).to receive(:config).exactly(3).times
       subject.apply(config)
 
     end
@@ -47,7 +50,9 @@ describe Spurious::Ruby::Awssdk::Strategy do
     it "only sets the port for one service" do
       subject.dynamo(true)
 
-      expect(AWS).to receive(:config).once.with(:dynamo_db_port => 314).times
+      expect(AWS).to receive(:config).with(:dynamo_db_port => 314)
+      expect(AWS).to receive(:config).with(:dynamo_db_endpoint => "foo")
+      expect(AWS).to receive(:config).with({:use_ssl=>false, :s3_force_path_style=>true})
       subject.apply(config)
 
     end

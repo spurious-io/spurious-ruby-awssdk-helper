@@ -1,6 +1,7 @@
 # Spurious::Ruby::Awssdk::Helper
 
-TODO: Write a gem description
+A ruby helper class for configuring the ruby `aws-sdk` to
+talk to the spurious services.
 
 ## Installation
 
@@ -18,7 +19,41 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+You can configure the `aws-sdk` two different ways:
+
+1. Shelling out to the CLI tool for the current port mappings
+2. Getting current port mappings from linked docker containers
+
+## CLI strategy
+
+Generally you have this setup done at the entry point of your
+application or in a di container:
+
+```ruby
+require 'spurious/ruby/awssdk/helper'
+
+Spurious::Ruby::Awssdk::Helper.configure
+```
+
+
+## Docker strategy
+
+If you're running you application in a container on the same host
+as spurious then you can pass in the following linked containers:
+
+```bash
+docker run ... --link sprious-s3:s3.spurious.localhost --link spurious
+-sqs:sqs.spurious.localhost --link spurious-dynamodb:dynamodb.spurious.localhost
+```
+
+then inside your application:
+
+```ruby
+require 'spurious/ruby/awssdk/helper'
+
+Spurious::Ruby::Awssdk::Helper.configure :docker
+
+```
 
 ## Contributing
 

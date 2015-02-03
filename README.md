@@ -1,6 +1,7 @@
 # Spurious::Ruby::Awssdk::Helper
 
-[![Build Status](https://travis-ci.org/spurious-io/ruby-awssdk-helper.png?branch=master)](https://travis-ci.org/spurious-io/ruby-awssdk-helper)[![Gem Version](https://badge.fury.io/rb/spurious-ruby-awssdk-helper.png)](http://badge.fury.io/rb/spurious-ruby-awssdk-helper)
+[![Build Status](https://travis-ci.org/spurious-io/ruby-awssdk-helper.png?branch=master)](https://travis-ci.org/spurious-io/ruby-awssdk-helper)
+[![Gem Version](https://badge.fury.io/rb/spurious-ruby-awssdk-helper.png)](http://badge.fury.io/rb/spurious-ruby-awssdk-helper)
 
 A ruby helper class for configuring the ruby `aws-sdk` to
 talk to the spurious services.

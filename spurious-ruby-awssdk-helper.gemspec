@@ -22,5 +22,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake"
   spec.add_development_dependency "rake-rspec", ">= 0.0.2"
 
-  spec.add_runtime_dependency "aws-sdk"
+  spec.add_runtime_dependency "aws-sdk", "~> 1"
 end

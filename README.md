@@ -45,8 +45,8 @@ If you're running you application in a container on the same host
 as spurious then you can pass in the following linked containers:
 
 ```bash
-docker run ... --link sprious-s3:s3.spurious.localhost --link spurious
--sqs:sqs.spurious.localhost --link spurious-dynamodb:dynamodb.spurious.localhost
+docker run ... --link spurious-s3:s3.spurious.localhost --link spurious
+-sqs:sqs.spurious.localhost --link spurious-dynamo:dynamodb.spurious.localhost
 ```
 
 then inside your application:

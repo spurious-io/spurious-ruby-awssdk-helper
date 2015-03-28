@@ -43,6 +43,7 @@ module Spurious
         def apply(config)
           mapping.each do |type, mappings|
             ports = config[type]
+            if ports == [] then raise "It looks like the containers are not spun up." end
             AWS.config("#{mappings['identifier']}_port".to_sym => ports.first['HostPort']) if mappings['port']
             AWS.config("#{mappings['identifier']}_endpoint".to_sym => ports.first['Host']) if mappings['ip']
           end

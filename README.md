@@ -20,6 +20,12 @@ Or install it yourself as:
 
     $ gem install spurious-ruby-awssdk-helper
 
+## AWS SDK Versions
+
+- The gem supports using both `~v1` and `~v2` of the `aws-sdk` gem.
+- The gem uses `~v1` before it's `v1.0.0` release.
+- The gem uses `~v2` past it's `v1.0.0+` release.
+
 ## Usage
 
 You can configure the `aws-sdk` two different ways:

@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["stevenmajack@gmail.com"]
   spec.summary       = %q{Helper gem for configuring the AWS ruby SDK with spurious details}
   spec.description   = %q{Helper gem for configuring the AWS ruby SDK with spurious details}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/spurious-io/ruby-awssdk-helper"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")

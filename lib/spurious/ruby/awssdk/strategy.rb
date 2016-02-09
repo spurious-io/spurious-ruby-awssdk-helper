@@ -24,10 +24,6 @@ module Spurious
           Aws.config.update(:use_ssl => false, :s3_force_path_style => true)
         end
 
-        private
-
-        attr_reader :mapping
-
         def dynamo(port = true, ip = true)
           mapping["spurious-dynamo"] = {
             "port"       => port,
@@ -51,6 +47,10 @@ module Spurious
             "identifier" => "sqs"
           }
         end
+
+        private
+
+        attr_reader :mapping
       end
     end
   end

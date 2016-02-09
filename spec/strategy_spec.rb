@@ -8,6 +8,31 @@ describe Spurious::Ruby::Awssdk::Strategy do
     allow(Aws).to receive(:config).with(no_args) { mock_config }
   end
 
+  let(:config) do
+    {
+      "spurious-sqs" => [
+        {
+          "GuestPort" => 123,
+          "HostPort"  => 456,
+          "Host"      => "foo"
+        }
+      ],
+      "spurious-s3" => [
+        {
+          "GuestPort" => 789,
+          "HostPort"  => 101,
+          "Host"      => "foo"
+        }
+      ],
+      "spurious-dynamo" => [
+        {
+          "GuestPort" => 121,
+          "HostPort"  => 314,
+          "Host"      => "foo"
+        }
+      ]
+    }
+  end
   let(:mock_config) { Hash.new }
   let(:set_all) { true }
 
@@ -26,21 +51,41 @@ describe Spurious::Ruby::Awssdk::Strategy do
         subject.apply config
       end
     end
+  end
 
-    it "only applys a subset of the options" do
-      subject.dynamo(true, true)
+  describe "#dynamo" do
+    let(:set_all) { false }
+    before { subject.dynamo(true, true) }
 
-      expect(Aws).to receive(:config).exactly(3).times
-      subject.apply(config)
+    context "sets ports just for this service" do
+      specify do
+        expect(mock_config).to receive(:update).exactly(3).times
+        subject.apply config
+      end
     end
+  end
 
-    it "only sets the port for one service" do
-      subject.dynamo(true)
+  describe "#s3" do
+    let(:set_all) { false }
+    before { subject.s3(true, true) }
 
-      expect(Aws).to receive(:config).with(:dynamo_db_port => 314)
-      expect(Aws).to receive(:config).with(:dynamo_db_endpoint => "foo")
-      expect(Aws).to receive(:config).with({:use_ssl=>false, :s3_force_path_style=>true})
-      subject.apply(config)
+    context "sets ports just for this service" do
+      specify do
+        expect(mock_config).to receive(:update).exactly(3).times
+        subject.apply config
+      end
+    end
+  end
+
+  describe "#sqs" do
+    let(:set_all) { false }
+    before { subject.sqs(true, true) }
+
+    context "sets ports just for this service" do
+      specify do
+        expect(mock_config).to receive(:update).exactly(3).times
+        subject.apply config
+      end
     end
   end
 end

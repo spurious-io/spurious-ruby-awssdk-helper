@@ -33,7 +33,12 @@ describe Spurious::Ruby::Awssdk::Strategy do
       ]
     }
   end
-  let(:mock_config) { Hash.new }
+  let(:mock_config) do
+    instance_double(
+      "Hash",
+      :update => nil
+    )
+  end
   let(:set_all) { true }
 
   describe "#apply" do
@@ -63,6 +68,16 @@ describe Spurious::Ruby::Awssdk::Strategy do
         subject.apply config
       end
     end
+
+    specify do
+      expect(mock_config).to receive(:update).with(:dynamo_db_port => 314).once
+      subject.apply config
+    end
+
+    specify do
+      expect(mock_config).to receive(:update).with(:dynamo_db_endpoint => "foo").once
+      subject.apply config
+    end
   end
 
   describe "#s3" do
@@ -75,6 +90,16 @@ describe Spurious::Ruby::Awssdk::Strategy do
         subject.apply config
       end
     end
+
+    specify do
+      expect(mock_config).to receive(:update).with(:s3_port => 101).once
+      subject.apply config
+    end
+
+    specify do
+      expect(mock_config).to receive(:update).with(:s3_endpoint => "foo").once
+      subject.apply config
+    end
   end
 
   describe "#sqs" do
@@ -86,6 +111,16 @@ describe Spurious::Ruby::Awssdk::Strategy do
         expect(mock_config).to receive(:update).exactly(3).times
         subject.apply config
       end
+    end
+
+    specify do
+      expect(mock_config).to receive(:update).with(:sqs_port => 456).once
+      subject.apply config
+    end
+
+    specify do
+      expect(mock_config).to receive(:update).with(:sqs_endpoint => "foo").once
+      subject.apply config
     end
   end
 end

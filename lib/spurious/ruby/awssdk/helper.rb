@@ -52,7 +52,6 @@ module Spurious
           strategy ||= Spurious::Ruby::Awssdk::Strategy.new(true)
           strategy.apply(config(type))
         end
-
       end
     end
   end

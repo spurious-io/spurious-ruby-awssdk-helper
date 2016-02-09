@@ -1,29 +1,28 @@
-require 'helper'
+require "helper"
 
 describe Spurious::Ruby::Awssdk::Strategy do
-
   describe "#apply" do
     let(:config) {
       {
-        'spurious-sqs' => [
+        "spurious-sqs" => [
           {
-            'GuestPort' => 123,
-            'HostPort'  => 456,
-            'Host'      => 'foo'
+            "GuestPort" => 123,
+            "HostPort"  => 456,
+            "Host"      => "foo"
           }
         ],
-        'spurious-s3' => [
+        "spurious-s3" => [
           {
-            'GuestPort' => 789,
-            'HostPort'  => 101,
-            'Host'      => 'foo'
+            "GuestPort" => 789,
+            "HostPort"  => 101,
+            "Host"      => "foo"
           }
         ],
-        'spurious-dynamo' => [
+        "spurious-dynamo" => [
           {
-            'GuestPort' => 121,
-            'HostPort'  => 314,
-            'Host'      => 'foo'
+            "GuestPort" => 121,
+            "HostPort"  => 314,
+            "Host"      => "foo"
           }
         ]
       }

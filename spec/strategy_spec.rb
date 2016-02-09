@@ -56,6 +56,14 @@ describe Spurious::Ruby::Awssdk::Strategy do
         subject.apply config
       end
     end
+
+    specify do
+      expect(mock_config).to receive(:update).with({
+        :use_ssl             => false,
+        :s3_force_path_style => true
+      }).once
+      subject.apply config
+    end
   end
 
   describe "#dynamo" do

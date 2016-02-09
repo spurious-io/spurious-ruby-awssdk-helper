@@ -8,31 +8,6 @@ describe Spurious::Ruby::Awssdk::Strategy do
     allow(Aws).to receive(:config).with(no_args) { mock_config }
   end
 
-  let(:config) {
-    {
-      "spurious-sqs" => [
-        {
-          "GuestPort" => 123,
-          "HostPort"  => 456,
-          "Host"      => "foo"
-        }
-      ],
-      "spurious-s3" => [
-        {
-          "GuestPort" => 789,
-          "HostPort"  => 101,
-          "Host"      => "foo"
-        }
-      ],
-      "spurious-dynamo" => [
-        {
-          "GuestPort" => 121,
-          "HostPort"  => 314,
-          "Host"      => "foo"
-        }
-      ]
-    }
-  }
   let(:mock_config) { Hash.new }
   let(:set_all) { true }
 

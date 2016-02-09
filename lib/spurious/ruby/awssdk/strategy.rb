@@ -9,11 +9,11 @@ module Spurious
 
         def initialize(set_all = false)
           @mapping = {}
-          if set_all then
-            dynamo
-            sqs
-            s3
-          end
+          return unless set_all
+
+          dynamo
+          sqs
+          s3
         end
 
         def dynamo(port = true, ip = true)
@@ -43,14 +43,12 @@ module Spurious
         def apply(config)
           mapping.each do |type, mappings|
             ports = config[type]
-            AWS.config("#{mappings['identifier']}_port".to_sym => ports.first['HostPort']) if mappings['port']
-            AWS.config("#{mappings['identifier']}_endpoint".to_sym => ports.first['Host']) if mappings['ip']
+            Aws.config("#{mappings['identifier']}_port".to_sym => ports.first['HostPort']) if mappings['port']
+            Aws.config("#{mappings['identifier']}_endpoint".to_sym => ports.first['Host']) if mappings['ip']
           end
 
-          AWS.config(:use_ssl => false, :s3_force_path_style => true)
-
+          Aws.config(:use_ssl => false, :s3_force_path_style => true)
         end
-
       end
     end
   end

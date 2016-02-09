@@ -17,11 +17,11 @@ module Spurious
         def apply(config)
           mapping.each do |type, mappings|
             ports = config[type]
-            Aws.config("#{mappings['identifier']}_port".to_sym => ports.first["HostPort"]) if mappings["port"]
-            Aws.config("#{mappings['identifier']}_endpoint".to_sym => ports.first["Host"]) if mappings["ip"]
+            Aws.config.update("#{mappings['identifier']}_port".to_sym => ports.first["HostPort"]) if mappings["port"]
+            Aws.config.update("#{mappings['identifier']}_endpoint".to_sym => ports.first["Host"]) if mappings["ip"]
           end
 
-          Aws.config(:use_ssl => false, :s3_force_path_style => true)
+          Aws.config.update(:use_ssl => false, :s3_force_path_style => true)
         end
 
         private
